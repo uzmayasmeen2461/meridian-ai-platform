@@ -1,0 +1,28 @@
+[project]
+name = "meridian-backend"
+version = "0.1.0"
+description = "Backend foundation for Meridian AI usage ingestion"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115",
+  "mcp>=2.3.0",
+  "pydantic>=2.8",
+  "pyyaml>=6.0",
+  "sqlalchemy>=2.0",
+  "uvicorn>=0.30",
+]
+
+[project.scripts]
+meridian-bootstrap = "app.cli:main"
+meridian-mcp = "app.mcp_server:main"
+
+[project.optional-dependencies]
+test = [
+  "httpx2>=2.13",
+  "jsonschema>=4.20",
+  "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+backend/*.db
+backend/*-meridian.db
+backend/meridian_backend.egg-info/
+
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts
+
+provisioning/rendered/

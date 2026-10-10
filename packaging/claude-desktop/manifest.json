@@ -1,0 +1,97 @@
+{
+  "manifest_version": "0.3",
+  "name": "meridian-usage",
+  "display_name": "Meridian Usage Connector",
+  "version": "0.1.0",
+  "description": "Local MCP connector for Meridian AI usage, cost, top users, and capability governance.",
+  "author": {
+    "name": "Meridian AI Platform Team"
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "python3",
+      "args": [
+        "${__dirname}/server/main.py"
+      ],
+      "env": {
+        "PYTHONPATH": "${user_config.backend_path}",
+        "MERIDIAN_DATABASE_URL": "${user_config.database_url}",
+        "MERIDIAN_ENV": "${user_config.environment}",
+        "MERIDIAN_STARTER_KIT": "${user_config.starter_kit_path}",
+        "MERIDIAN_MCP_USER_ID": "${user_config.mcp_user_id}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "usage_summary",
+      "description": "Summarize Claude and Gemini usage and cost for an authorized group and period."
+    },
+    {
+      "name": "top_users",
+      "description": "Return the highest token users for an authorized group and period."
+    },
+    {
+      "name": "capability_status",
+      "description": "Show current capability states for an authorized group."
+    },
+    {
+      "name": "set_capability",
+      "description": "Persist an authorized capability override for a group."
+    }
+  ],
+  "tools_generated": false,
+  "keywords": [
+    "usage",
+    "governance",
+    "enterprise-ai",
+    "meridian"
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "linux",
+      "win32"
+    ],
+    "runtimes": {
+      "python": ">=3.12"
+    }
+  },
+  "user_config": {
+    "backend_path": {
+      "type": "directory",
+      "title": "Backend package directory",
+      "description": "Path to the Meridian backend directory containing the app package.",
+      "required": true
+    },
+    "database_url": {
+      "type": "string",
+      "title": "SQLite database URL",
+      "description": "SQLAlchemy URL for the ingested Meridian SQLite database.",
+      "default": "sqlite:///backend/meridian.db",
+      "required": true
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment",
+      "description": "One of dev, staging, or prod.",
+      "default": "prod",
+      "required": true
+    },
+    "starter_kit_path": {
+      "type": "directory",
+      "title": "Starter kit directory",
+      "description": "Path to the immutable starter-kit directory.",
+      "required": true
+    },
+    "mcp_user_id": {
+      "type": "string",
+      "title": "MCP simulated user ID",
+      "description": "Directory user ID that the local MCP server starts as.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

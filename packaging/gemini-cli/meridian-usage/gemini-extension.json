@@ -1,0 +1,29 @@
+{
+  "name": "meridian-usage",
+  "version": "0.1.0",
+  "contextFileName": "GEMINI.md",
+  "settings": [
+    {
+      "name": "Meridian MCP User ID",
+      "description": "Directory user ID that the local MCP server starts as.",
+      "envVar": "MERIDIAN_MCP_USER_ID",
+      "sensitive": true
+    }
+  ],
+  "mcpServers": {
+    "meridian-usage": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "app.mcp_server"
+      ],
+      "cwd": "${extensionPath}${/}..${/}..${/}..${/}backend",
+      "env": {
+        "MERIDIAN_DATABASE_URL": "sqlite:///${extensionPath}${/}..${/}..${/}..${/}backend${/}meridian.db",
+        "MERIDIAN_ENV": "prod",
+        "MERIDIAN_STARTER_KIT": "${extensionPath}${/}..${/}..${/}..${/}starter-kit",
+        "MERIDIAN_MCP_USER_ID": "$MERIDIAN_MCP_USER_ID"
+      }
+    }
+  }
+}
